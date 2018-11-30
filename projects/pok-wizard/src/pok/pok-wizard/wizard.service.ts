@@ -3,9 +3,7 @@ import { WizardStep } from './wizard-step.model';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class WizardService {
   private steps: WizardStep[];
   private activeStep: WizardStep;
@@ -48,15 +46,7 @@ export class WizardService {
       throw Error('Step ' + stepId + ' is not included currently');
     }
 
-    if (this.isJumpingForward(this.activeStep.id, stepId)
-        && !this.canJumpForwardToStep(this.activeStep.id, stepId)) {
-      return;
-    }
-
-    if (this.isJumpingForward(this.activeStep.id, stepId)
-        && !this.activeStep.valid) {
-
-      this.invalidStepSubject.next(this.activeStep);
+    if (this.isJumpingForward(this.activeStep.id, stepId) && !this.canJumpForwardToStep(this.activeStep.id, stepId)) {
       return;
     }
 
@@ -122,7 +112,14 @@ export class WizardService {
 
   private canJumpForwardToStep(currentStepId: any, destStepId: any): boolean {
     if (!this.isJumpingForward(currentStepId, destStepId)) {
+
       return true;
+    }
+
+    if (!this.activeStep.valid) {
+      this.invalidStepSubject.next(this.activeStep);
+
+      return false;
     }
 
     const currentStepIndex = this.steps.findIndex(s => s.id === currentStepId);
