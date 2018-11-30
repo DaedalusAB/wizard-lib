@@ -1,0 +1,62 @@
+<pok-wizard-step-container [activeStepId]="0"
+(finishEvent)="finish()"
+(stepBackEvent)="back()"
+(stepForwardEvent)="forward()"
+(invalidStep)="invalid($event)"
+(currentStep)="current($event)"
+(isOnFirstStep)="isOnFirstStep = $event; first($event)"
+(isOnLastStep)="isOnLastStep = $event; last($event)">
+
+  <pok-wizard-step [id]=0>
+    <div class="step">
+        Person or animal?
+        <div>
+            <input type="radio" id="person" name="type" [value]="person" (click)="makePerson()">
+            <label for="person">Person</label>
+        </div>
+        <div>
+          <input type="radio" id="animal" name="type" [value]="animal" (click)="makeAnimal()">
+          <label for="animal">Animal</label>
+        </div>
+    </div>
+  </pok-wizard-step>
+
+  <pok-wizard-step id=p1 [included]="person">
+    <div class="step">
+      Person!
+    </div>
+  </pok-wizard-step>
+
+  <pok-wizard-step id=a0 [included]="animal">
+    <div class="step">
+      Cat or dog?
+      <div>
+          <input type="radio" id=cat name="animalType" [value]="cat" (click)="makeDog()">
+          <label for="cat">Cat</label>
+      </div>
+      <div>
+        <input type="radio" id=dog name="animalType" [value]="dog" (click)="makeCat()">
+        <label for="dog">Dog</label>
+      </div>
+    </div>
+  </pok-wizard-step>
+
+  <pok-wizard-step id=a1 [included]="animal && cat">
+    <div class="step">
+      Cat!
+    </div>
+  </pok-wizard-step>
+
+  <pok-wizard-step id=a2 [included]="animal && dog">
+    <div class="step">
+      Dog!
+    </div>
+  </pok-wizard-step>
+
+  <div class="control">
+      <button pokWizardGoto [stepId]="0">First step</button>
+      <button pokWizardGoBack [disabled]="isOnFirstStep">Back</button>
+      <button pokWizardGoNext [disabled]="isOnLastStep">Next</button>
+      <button pokWizardFinish [disabled]="!isOnLastStep">Finish</button>
+  </div>
+</pok-wizard-step-container>

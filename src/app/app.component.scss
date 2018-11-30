@@ -1,0 +1,16 @@
+.step {
+  border: 1px solid black;
+  width: 500px;
+  height: 300px;
+  padding: 10px;
+  margin: auto;
+}
+
+.control {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
+  width: 500px;
+  padding: 10px;
+}
