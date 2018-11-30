@@ -9,7 +9,7 @@ import { WizardStep } from 'projects/pok-wizard/src/public_api';
 export class AppComponent implements OnInit{
   person = true;
   animal = false;
-  cat = false;
+  cat = true;
   dog = false;
   isOnFirstStep: boolean;
   isOnLastStep: boolean;
