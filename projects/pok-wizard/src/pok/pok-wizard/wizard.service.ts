@@ -107,7 +107,7 @@ export class WizardService {
   }
 
   private canLeaveCurrentStep(stepId: any) {
-    return this.isJumpingForward(this.activeStep.id, stepId) && !this.activeStep.valid;
+    return !this.isJumpingForward(this.activeStep.id, stepId) || this.activeStep.valid;
   }
 
   private canJumpForwardToStep(currentStepId: any, destStepId: any): boolean {
