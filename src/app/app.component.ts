@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   isOnFirstStep: boolean;
   isOnLastStep: boolean;
   mustBeTrue = false;
-
+  invalidStep: WizardStep;
   currentStep: WizardStep;
 
   ngOnInit() {
@@ -42,19 +42,31 @@ export class AppComponent implements OnInit{
   }
 
   public finish() {
+    this.resetInvalidStep();
     console.log('DONE');
   }
 
   public forward() {
+    this.resetInvalidStep();
     console.log('forward');
   }
 
   public back() {
+    this.resetInvalidStep();
     console.log('back');
   }
 
   public invalid(step: WizardStep) {
+    this.invalidStep = step;
     console.log('Step ' + step.id + ' is invalid, please fix it');
+  }
+
+  public isInvalid(stepId: any): boolean {
+    return this.invalidStep && this.invalidStep.id === stepId;
+  }
+
+  public resetInvalidStep() {
+    this.invalidStep = undefined;
   }
 
   public current(step: WizardStep) {

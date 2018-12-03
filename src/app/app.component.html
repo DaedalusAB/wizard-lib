@@ -1,4 +1,5 @@
 <pok-wizard-step-container
+[activeStepId]="0"
 (finishEvent)="finish()"
 (stepBackEvent)="back()"
 (stepForwardEvent)="forward()"
@@ -29,7 +30,10 @@
         </div>
         <div>
           Check this!
-          <input type="checkbox" [(ngModel)]="mustBeTrue">
+          <input type="checkbox" [(ngModel)]="mustBeTrue" (change)="resetInvalidStep()">
+          <span class="error" *ngIf="isInvalid(0)">
+            Check it!
+          </span>
         </div>
     </div>
   </pok-wizard-step>
