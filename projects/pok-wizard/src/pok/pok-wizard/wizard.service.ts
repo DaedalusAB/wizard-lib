@@ -31,10 +31,7 @@ export class WizardService {
     this.startingStep = this.activeStep;
     this.activeStep.activate();
 
-    this.currentStepSubject.next(this.activeStep);
-    this.isOnLastStepSubject.next(this.isOnLastStep());
-    this.isOnFirstStepSubject.next(this.activeStep === this.startingStep);
-    this.isOnFirstStepSubject.next(this.activeStep === this.steps[0]);
+    this.UpdateStepSubjects();
   }
 
   public goTo(stepId: any) {
@@ -58,10 +55,7 @@ export class WizardService {
     this.activeStep = this.steps.find(s => s.id === stepId);
     this.activeStep.activate();
 
-    this.currentStepSubject.next(this.activeStep);
-    this.isOnLastStepSubject.next(this.isOnLastStep());
-    this.isOnFirstStepSubject.next(this.activeStep === this.startingStep);
-    this.isOnFirstStepSubject.next(this.activeStep === this.steps[0]);
+    this.UpdateStepSubjects();
   }
 
   public goToNext() {
@@ -90,6 +84,13 @@ export class WizardService {
     this.finishSubject.next();
   }
 
+  private UpdateStepSubjects() {
+    this.currentStepSubject.next(this.activeStep);
+    this.isOnLastStepSubject.next(this.isOnLastStep());
+    this.isOnFirstStepSubject.next(this.activeStep === this.startingStep);
+    this.isOnFirstStepSubject.next(this.activeStep === this.steps[0]);
+  }
+
   private isOnLastStep(): boolean {
     return this.nextIncludedStepIndex() == null;
   }
@@ -112,13 +113,11 @@ export class WizardService {
 
   private canJumpForwardToStep(currentStepId: any, destStepId: any): boolean {
     if (!this.isJumpingForward(currentStepId, destStepId)) {
-
       return true;
     }
 
     if (!this.activeStep.valid) {
       this.invalidStepSubject.next(this.activeStep);
-
       return false;
     }
 
