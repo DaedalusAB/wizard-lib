@@ -1,4 +1,4 @@
-<pok-wizard-step-container
+<pok-wizard
 [activeStepId]="0"
 (finishEvent)="finish()"
 (stepBackEvent)="back()"
@@ -77,4 +77,4 @@
       <button pokWizardGoNext [disabled]="isOnLastStep">Next</button>
       <button pokWizardFinish [disabled]="!isOnLastStep">Finish</button>
   </div>
-</pok-wizard-step-container>
+</pok-wizard>

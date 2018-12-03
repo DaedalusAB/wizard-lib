@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { CommonModule } from '@angular/common';
-import { WizardStepContainerComponent } from './wizard-step-container/wizard-step-container.component';
+import { WizardComponent } from './wizard/wizard.component';
 import { GotoDirective } from './directives/goto.directive';
 import { GoToNextDirective } from './directives/go-next.directive';
 import { GoBackDirective } from './directives/go-back.directive';
@@ -10,8 +10,8 @@ import { FinishDirective } from './directives/finish.directive';
 @NgModule({
   declarations: [
     WizardStepComponent,
-    WizardStepContainerComponent,
-    WizardStepContainerComponent,
+    WizardComponent,
+    WizardComponent,
     GotoDirective,
     GoToNextDirective,
     GoBackDirective,
@@ -19,7 +19,7 @@ import { FinishDirective } from './directives/finish.directive';
   ],
   exports: [
     WizardStepComponent,
-    WizardStepContainerComponent,
+    WizardComponent,
     GotoDirective,
     GoToNextDirective,
     GoBackDirective,

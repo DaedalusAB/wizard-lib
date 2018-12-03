@@ -4,11 +4,11 @@ import { WizardService } from '../wizard.service';
 import { WizardStep } from '../wizard-step.model';
 
 @Component({
-  selector: 'pok-wizard-step-container',
-  templateUrl: './wizard-step-container.component.html',
+  selector: 'pok-wizard',
+  templateUrl: './wizard.component.html',
   providers: [WizardService]
 })
-export class WizardStepContainerComponent implements OnInit, AfterViewInit {
+export class WizardComponent implements OnInit, AfterViewInit {
   @Input() activeStepId: string;
 
   @ContentChildren(WizardStepComponent) private steps: WizardStepComponent[];
