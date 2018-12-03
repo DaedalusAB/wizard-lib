@@ -1,4 +1,4 @@
-<pok-wizard-step-container [activeStepId]="0"
+<pok-wizard-step-container
 (finishEvent)="finish()"
 (stepBackEvent)="back()"
 (stepForwardEvent)="forward()"
@@ -7,7 +7,14 @@
 (isOnFirstStep)="isOnFirstStep = $event; first($event)"
 (isOnLastStep)="isOnLastStep = $event; last($event)">
 
-  <pok-wizard-step [id]=0>
+  <pok-wizard-step id="whatever">
+    <div class="step">
+      Your Name:
+      <input type="text">
+    </div>
+  </pok-wizard-step>
+
+  <pok-wizard-step [id]=0 [valid]="mustBeTrue">
     <div class="step">
         Person or animal?
         <div>
@@ -17,6 +24,10 @@
         <div>
           <input type="radio" id="animal" name="type" [value]="animal" (click)="makeAnimal()">
           <label for="animal">Animal</label>
+        </div>
+        <div>
+          Check this!
+          <input type="checkbox" [(ngModel)]="mustBeTrue">
         </div>
     </div>
   </pok-wizard-step>
@@ -55,6 +66,7 @@
 
   <div class="control">
       <button pokWizardGoto [stepId]="0">First step</button>
+      <button pokWizardGoto [stepId]="'p1'">Jump to person</button>
       <button pokWizardGoBack [disabled]="isOnFirstStep">Back</button>
       <button pokWizardGoNext [disabled]="isOnLastStep">Next</button>
       <button pokWizardFinish [disabled]="!isOnLastStep">Finish</button>

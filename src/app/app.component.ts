@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   dog = false;
   isOnFirstStep: boolean;
   isOnLastStep: boolean;
+  mustBeTrue = false;
 
   currentStep: WizardStep;
 

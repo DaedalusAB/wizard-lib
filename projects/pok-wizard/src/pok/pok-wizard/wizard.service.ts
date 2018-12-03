@@ -20,8 +20,6 @@ export class WizardService {
   public isOnFirstStepSubject: Subject<boolean> = new Subject<boolean>();
   public isOnStartingStepSubject: Subject<boolean> = new Subject<boolean>();
 
-  constructor() { }
-
   public init(steps: WizardStepComponent[], startingStepId: any) {
     this.steps = steps.map(s => s.wizardStep);
 
@@ -30,61 +28,62 @@ export class WizardService {
       : this.steps[0];
     this.startingStep = this.activeStep;
     this.activeStep.activate();
-
-    this.UpdateStepSubjects();
+    this.updateStepSubjects();
   }
 
   public goTo(stepId: any) {
-    if (!this.stepExists(stepId)) {
+    if (this.findStep(stepId) == null) {
       throw Error('Step with id ' + stepId + ' could not be found');
     }
 
     if (!this.stepIsIncluded(stepId)) {
-      throw Error('Step ' + stepId + ' is not included currently');
+      throw Error('Step ' + stepId + ' is currently not included');
     }
 
-    if (this.isJumpingForward(this.activeStep.id, stepId) && !this.canJumpForwardToStep(this.activeStep.id, stepId)) {
+    if (!this.canLeaveCurrentStep(stepId)) {
+      this.invalidStepSubject.next(this.activeStep);
       return;
+    }
+
+    if (!this.canJumpForwardToStep(this.activeStep.id, stepId)) {
+      throw Error('Cannot jump over unvisited steps to get to step ' + stepId);
     }
 
     this.isJumpingForward(this.activeStep.id, stepId)
       ? this.stepForwardSubject.next()
       : this.stepBackSubject.next();
 
-    this.activeStep.deactivate();
-    this.activeStep = this.steps.find(s => s.id === stepId);
-    this.activeStep.activate();
-
-    this.UpdateStepSubjects();
+    this.changeActiveStep(stepId);
+    this.updateStepSubjects();
   }
 
   public goToNext() {
     const nextIncludedStep = this.nextIncludedStepIndex();
-    if (nextIncludedStep == null) {
-      return;
+    if (nextIncludedStep != null) {
+      this.goTo(nextIncludedStep.id);
     }
-
-    this.goTo(nextIncludedStep.id);
   }
 
   public goToPrevious() {
     const prevIncludedStep = this.previousIncludedStepIndex();
-    if (prevIncludedStep == null) {
-      return;
+    if (prevIncludedStep != null) {
+      this.goTo(prevIncludedStep.id);
     }
-
-    this.goTo(prevIncludedStep.id);
   }
 
   public finish() {
-    if (!this.isOnLastStep()) {
-      return;
+    if (this.isOnLastStep()) {
+      this.finishSubject.next();
     }
-
-    this.finishSubject.next();
   }
 
-  private UpdateStepSubjects() {
+  private changeActiveStep(stepId: any) {
+    this.activeStep.deactivate();
+    this.activeStep = this.findStep(stepId);
+    this.activeStep.activate();
+  }
+
+  private updateStepSubjects() {
     this.currentStepSubject.next(this.activeStep);
     this.isOnLastStepSubject.next(this.isOnLastStep());
     this.isOnFirstStepSubject.next(this.activeStep === this.startingStep);
@@ -99,10 +98,6 @@ export class WizardService {
     return this.steps.find(s => s.id === id);
   }
 
-  private stepExists(id: any): boolean {
-    return this.findStep(id) != null;
-  }
-
   private stepIsIncluded(id: any): boolean {
     return this.findStep(id).included;
   }
@@ -111,14 +106,13 @@ export class WizardService {
     return this.steps.findIndex(s => s.id === currentStepId) < this.steps.findIndex(s => s.id === destStepId);
   }
 
+  private canLeaveCurrentStep(stepId: any) {
+    return this.isJumpingForward(this.activeStep.id, stepId) && !this.activeStep.valid;
+  }
+
   private canJumpForwardToStep(currentStepId: any, destStepId: any): boolean {
     if (!this.isJumpingForward(currentStepId, destStepId)) {
       return true;
-    }
-
-    if (!this.activeStep.valid) {
-      this.invalidStepSubject.next(this.activeStep);
-      return false;
     }
 
     const currentStepIndex = this.steps.findIndex(s => s.id === currentStepId);
