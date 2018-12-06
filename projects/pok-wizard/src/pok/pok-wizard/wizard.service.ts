@@ -85,7 +85,7 @@ export class WizardService {
   }
 
   private updateStepSubjects() {
-    this.allStepsSubject.next(this.steps);
+    this.allStepsSubject.next(this.steps.slice());
     this.currentStepSubject.next(this.activeStep);
     this.isOnLastStepSubject.next(this.isOnLastStep());
     this.isOnFirstStepSubject.next(this.activeStep === this.startingStep);
