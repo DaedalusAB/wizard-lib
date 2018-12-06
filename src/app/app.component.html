@@ -6,7 +6,8 @@
 (invalidStep)="invalid($event)"
 (currentStep)="current($event)"
 (isOnFirstStep)="isOnFirstStep = $event; first($event)"
-(isOnLastStep)="isOnLastStep = $event; last($event)">
+(isOnLastStep)="isOnLastStep = $event; last($event)"
+(wizardSteps)="allSteps($event)">
 
   <pok-wizard-step id="whatever">
     <div class="step">
@@ -78,3 +79,5 @@
       <button pokWizardFinish [disabled]="!isOnLastStep">Finish</button>
   </div>
 </pok-wizard>
+
+{{currentStep?.id}}

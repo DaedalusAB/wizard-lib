@@ -81,4 +81,8 @@ export class AppComponent implements OnInit{
   public last(val: boolean) {
     console.log('last', val);
   }
+
+  public allSteps(steps: WizardStep[]) {
+    console.log(steps);
+  }
 }

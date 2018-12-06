@@ -15,6 +15,7 @@ export class WizardService {
 
   public invalidStepSubject: Subject<WizardStep> = new Subject<WizardStep>();
 
+  public allStepsSubject: Subject<WizardStep[]> = new Subject<WizardStep[]>();
   public currentStepSubject: Subject<WizardStep> = new Subject<WizardStep>();
   public isOnLastStepSubject: Subject<boolean> = new Subject<boolean>();
   public isOnFirstStepSubject: Subject<boolean> = new Subject<boolean>();
@@ -84,6 +85,7 @@ export class WizardService {
   }
 
   private updateStepSubjects() {
+    this.allStepsSubject.next(this.steps);
     this.currentStepSubject.next(this.activeStep);
     this.isOnLastStepSubject.next(this.isOnLastStep());
     this.isOnFirstStepSubject.next(this.activeStep === this.startingStep);

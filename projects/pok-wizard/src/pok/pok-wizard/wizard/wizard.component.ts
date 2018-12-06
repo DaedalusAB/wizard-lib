@@ -13,6 +13,8 @@ export class WizardComponent implements OnInit, AfterViewInit {
 
   @ContentChildren(WizardStepComponent) private steps: WizardStepComponent[];
 
+  @Output() wizardSteps: EventEmitter<WizardStep[]> = new EventEmitter<WizardStep[]>();
+
   @Output() finishEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() stepForwardEvent: EventEmitter<void> = new EventEmitter<void>();
   @Output() stepBackEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -41,6 +43,10 @@ export class WizardComponent implements OnInit, AfterViewInit {
 
     this.wizardService.invalidStepSubject.subscribe(
       (step: WizardStep) => this.invalidStep.emit(step)
+    );
+
+    this.wizardService.allStepsSubject.subscribe(
+      (steps: WizardStep[]) => this.wizardSteps.emit(steps)
     );
 
     this.wizardService.currentStepSubject.subscribe(
