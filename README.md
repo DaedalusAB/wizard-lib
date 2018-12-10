@@ -1,7 +1,5 @@
 # Pretty Ok Wizard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
-
 ## Description
 
 A wizard module for Angular applications. Deals mostly with navigation. 
