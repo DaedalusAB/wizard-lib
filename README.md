@@ -1,27 +1,32 @@
-# Wizard
+# Pretty Ok Wizard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
 
-## Development server
+## Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+A wizard module for Angular applications. Deals mostly with navigation. 
+* Has optional steps.
+* Can navigate to any previous step, always.
+* Can navigate forward to any steps, if current step is valid and you are not jumping over a step you haven't visited previously.
+* Emits events whenever a step changes (on next or back), the wizard finishes, a step is invalit, etc.
+* Provides attribute directives for navigation (Next, Back, GoTo, Finish)
+* The style (CSS) is up to you.
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To install this component, follow the procedure:
+1. **npm install pok-wizard --save**
+2. Add PokWizardModule
+`
+import { PokWizardModule } from 'pok-wizard';
+  
+@NgModule({
+    imports:      [ BrowserModule, PokWizardModule ],
+    declarations: [ MyTestApp ],
+    bootstrap:    [ MyTestApp ]
+})
+export class MyTestAppModule {}
+`
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Usage
+// todo
