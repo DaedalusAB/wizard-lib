@@ -62,3 +62,14 @@ Emits `true` if current step is the step you provided as `[activeStepId]`
 Emits `true` if current step is the the first step you've defined.
 #### (isOnLastStep)
 Emits `true` if the current step is the last, included step.
+
+### <pok-wizard-step>
+#### [id]
+Unique id of the step. Must be provided, can be anything (`any`). Used to identify the step in navigation.
+#### [included]
+`boolean` flag used to determine if this step is currently included. Can be changed dynamically. 
+#### [valid]
+`boolean` flag used to determine if this step is currently valid. Can be changed dynamically. 
+
+### WizardStep
+Exposes the state of the step. 
