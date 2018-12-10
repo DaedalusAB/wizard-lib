@@ -72,4 +72,14 @@ Unique id of the step. Must be provided, can be anything (`any`). Used to identi
 `boolean` flag used to determine if this step is currently valid. Can be changed dynamically. 
 
 ### WizardStep
-Exposes the state of the step. 
+Exposes the state of the step. `<pok-wizard>` emits this type on `(currentStep)` and `(wizardSteps)`
+
+```javascript
+export class WizardStep {
+  public id: any;
+  public active: boolean;
+  public visited: boolean;
+  public included: boolean;
+  public valid: boolean;
+}
+```
