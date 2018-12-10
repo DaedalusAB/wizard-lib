@@ -17,7 +17,7 @@ A wizard module for Angular applications. Deals mostly with navigation.
 To install this component, follow the procedure:
 1. **npm install pok-wizard --save**
 2. Add PokWizardModule
-`
+```javascript
 import { PokWizardModule } from 'pok-wizard';
   
 @NgModule({
@@ -26,7 +26,7 @@ import { PokWizardModule } from 'pok-wizard';
     bootstrap:    [ MyTestApp ]
 })
 export class MyTestAppModule {}
-`
+```
 
 ## Usage
 // todo
