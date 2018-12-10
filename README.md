@@ -28,7 +28,7 @@ export class MyAppModule {}
 ```
 
 ## Usage
-Add `pok-wizard` component to the html template, like this:
+Add `pok-wizard` component to the html template, like this (make sure you provide step ids and to make them unique)
 ```html
 <pok-wizard-step>
   <pok-wizard-step id="1"> Step 1 content </pok-wizard-step>
@@ -37,3 +37,28 @@ Add `pok-wizard` component to the html template, like this:
   <button pokWizardGoNext>Next</button>
 </pok-wizard-step>
 ```
+
+## Components 
+
+### <pok-wizard>
+This is where you define your steps and where the attribute directives work. Each `<pok-wizard>` has its own service, and multiple `<pok-wizard>` components can run at the same time. 
+#### [activeStepId] 
+The id of the active step. The wizard will start on this step. Can be left out in case you want the wizard to start on the first step you define.
+#### (wizardSteps) 
+Emits all the steps you've defines and their status. The data type is `WizardStep[]`, `WizardStep` is defined in this module (see below)
+#### (finishEvent)
+Emits when wizard finishes.
+#### (stepForwardEvent) 
+Emits when the step changes forward.
+#### (stepBackEvent)
+Emtis when step changes backwards.
+#### (invalidStep)
+Emits when you try to navigate forward/finish, but the current step is invalid. Emits the current step (`WizardStep`)
+#### (currentStep)
+Emits the current step. Emits when the wizards initializes and whenever the step changes.
+#### (isOnStartingStep)
+Emits `true` if current step is the step you provided as `[activeStepId]`
+#### (isOnFirstStep)
+Emits `true` if current step is the the first step you've defined.
+#### (isOnLastStep)
+Emits `true` if the current step is the last, included step.
