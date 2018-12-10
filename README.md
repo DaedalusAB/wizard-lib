@@ -38,7 +38,7 @@ Add `pok-wizard` component to the html template, like this (make sure you provid
 
 ## Components 
 
-### <pok-wizard>
+### `<pok-wizard>`
 This is where you define your steps and where the attribute directives work. Each `<pok-wizard>` has its own service, and multiple `<pok-wizard>` components can run at the same time. 
 #### [activeStepId] 
 The id of the active step. The wizard will start on this step. Can be left out in case you want the wizard to start on the first step you define.
@@ -61,7 +61,8 @@ Emits `true` if current step is the the first step you've defined.
 #### (isOnLastStep)
 Emits `true` if the current step is the last, included step.
 
-### <pok-wizard-step>
+
+### `<pok-wizard-step>`
 #### [id]
 Unique id of the step. Must be provided, can be anything (`any`). Used to identify the step in navigation.
 #### [included]
