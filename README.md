@@ -22,11 +22,18 @@ import { PokWizardModule } from 'pok-wizard';
   
 @NgModule({
     imports:      [ BrowserModule, PokWizardModule ],
-    declarations: [ MyTestApp ],
-    bootstrap:    [ MyTestApp ]
+    // ...
 })
-export class MyTestAppModule {}
+export class MyAppModule {}
 ```
 
 ## Usage
-// todo
+Add `pok-wizard` component to the html template, like this:
+```html
+<pok-wizard-step>
+  <pok-wizard-step id="1"> Step 1 content </pok-wizard-step>
+  <pok-wizard-step id="2"> Step 2 content </pok-wizard-step>
+  <button pokWizardGoBack>Back</button>
+  <button pokWizardGoNext>Next</button>
+</pok-wizard-step>
+```
