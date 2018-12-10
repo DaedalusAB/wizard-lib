@@ -70,7 +70,7 @@ Unique id of the step. Must be provided, can be anything (`any`). Used to identi
 #### [valid]
 `boolean` flag used to determine if this step is currently valid. Can be changed dynamically. 
 
-### WizardStep
+### `WizardStep`
 Exposes the state of the step. `<pok-wizard>` emits this type on `(currentStep)` and `(wizardSteps)`
 
 ```javascript
@@ -84,25 +84,25 @@ export class WizardStep {
 ```
 
 ### Directives
-#### pokWizardGoTo
+#### `pokWizardGoTo`
 Navigates to step with provided id. Can only navigate to included step. Can always navigate back. Can only navigate forward if current step is valid and it doesn't jump over unvisited steps. Usage:
 
 ```
 <button pokWizardGoTo stepId=0>Go to step with id 0</button>
 ```
 
-#### pokWizardGoNext
+#### `pokWizardGoNext`
 Navigates to the next included step. Doesn't do anything if there is no such step. Doesn't move if current step is invalid.
 ```
 <button pokWizardGoNext>Next</button>
 ```
-#### pokWizardGoBack
+#### `pokWizardGoBack`
 Navigates to the previous included step. Doesnt do anything if there is no such step.
 ```
 <button pokWizardGoBack>Back</button>
 ```
 
-#### pokWizardFinish
+#### `pokWizardFinish`
 Emits the `(finishEvent)` if the current step is the last included step and it is valid.
 ```
 <button pokWizardFinish>Finish</button>
